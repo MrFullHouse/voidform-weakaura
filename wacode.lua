@@ -4,33 +4,8 @@ function(event,time,type,_,sourceGUID,sourcename,_,_,destGUID,destname,_,_,spell
     if event == "COMBAT_LOG_EVENT_UNFILTERED" then
         
         WA_Voidform_Total_Stacks = WA_Voidform_Total_Stacks or 0;
-        
-        if WA_Voidform_Total_Stacks >= 100 then
-            
-            if (CurrentTime - WA_Voidform_Previous_Stack_Time) >= 1 then
-                
-                WA_Voidform_Previous_Stack_Time = CurrentTime;
-                WA_Voidform_Total_Stacks = WA_Voidform_Total_Stacks + 1;
-                
-                
-                if WA_Voidform_VoidTorrent_Start == nil and WA_Voidform_Dispersion_Start == nil then
-                    
-                    WA_Voidform_Drain_Stacks = WA_Voidform_Drain_Stacks + 1;
-                    
-                elseif WA_Voidform_VoidTorrent_Start ~= nil then
-                    
-                    WA_Voidform_VoidTorrent_Stacks = WA_Voidform_VoidTorrent_Stacks + 1;
-                    
-                else
-                    
-                    WA_Voidform_Dispersion_Stacks = WA_Voidform_Dispersion_Stacks + 1;
-                    
-                end                
-            end
-            
-        end
-        
-        
+       
+
         if sourceGUID == UnitGUID("player") then
             
             if spellid == 194249 then
