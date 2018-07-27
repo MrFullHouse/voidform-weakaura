@@ -1,4 +1,5 @@
 -- Insanity Bar -- By Twintop - Illidan-US, 2016/07/28
+--- Edited By Китчен - Azuregos-RU, 2018/07
 function(event,time,type,_,sourceGUID,sourcename,_,_,destGUID,destname,_,_,spellid,spellname,_,_,_,_,_,_,_,spellcritical,_,_,_,spellmultistrike)
     local CurrentTime = GetTime();
     if event == "COMBAT_LOG_EVENT_UNFILTERED" then
