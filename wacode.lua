@@ -5,7 +5,6 @@ function(event,time,type,_,sourceGUID,sourcename,_,_,destGUID,destname,_,_,spell
         
         WA_Voidform_Total_Stacks = WA_Voidform_Total_Stacks or 0;
        
-
         if sourceGUID == UnitGUID("player") then
             
             if spellid == 194249 then
@@ -13,47 +12,21 @@ function(event,time,type,_,sourceGUID,sourcename,_,_,destGUID,destname,_,_,spell
                 if type == "SPELL_AURA_APPLIED" then -- Entered Voidform
                     
                     WA_Voidform_Previous_Stack_Time = CurrentTime;
-                    WA_Voidform_VoidTorrent_Start = nil;
-                    WA_Voidform_Dispersion_Start = nil;
-                    WA_Voidform_Drain_Stacks = 1;
                     WA_Voidform_Start_Time = CurrentTime;
                     WA_Voidform_Total_Stacks = 1;
-                    WA_Voidform_VoidTorrent_Stacks = 0;
-                    WA_Voidform_Dispersion_Stacks = 0;
                     
                 elseif type == "SPELL_AURA_APPLIED_DOSE" then -- New Voidform Stack
                     
                     WA_Voidform_Previous_Stack_Time = CurrentTime;
                     WA_Voidform_Total_Stacks = WA_Voidform_Total_Stacks + 1;
                     
-                    if WA_Voidform_VoidTorrent_Start == nil and WA_Voidform_Dispersion_Start == nil then
-                        
-                        WA_Voidform_Drain_Stacks = WA_Voidform_Drain_Stacks + 1;
-                        
-                    elseif WA_Voidform_VoidTorrent_Start ~= nil then
-                        
-                        WA_Voidform_VoidTorrent_Stacks = WA_Voidform_VoidTorrent_Stacks + 1;
-                        
-                    else
-                        
-                        WA_Voidform_Dispersion_Stacks = WA_Voidform_Dispersion_Stacks + 1;
-                        
-                    end
                     
                 elseif type == "SPELL_AURA_REMOVED" then -- Exited Voidform
                     if WA_Insanity_Bar_Voidform_Summary == true then
                         print("Voidform Info:");
                         print("--------------------------");
                         print(string.format("Voidform Duration: %.2f seconds", (CurrentTime-WA_Voidform_Start_Time)));
-                        
-                        if WA_Voidform_Total_Stacks > 100 then
-                            print(string.format("Voidform Stacks: 100 (+%.0f)", (WA_Voidform_Total_Stacks-100)));
-                        else
-                            print(string.format("Voidform Stacks: %.0f", WA_Voidform_Total_Stacks));
-                        end
-                        
-                        print(string.format("Dispersion Stacks: %.0f", WA_Voidform_Dispersion_Stacks));
-                        print(string.format("Void Torrent Stacks: %.0f", WA_Voidform_VoidTorrent_Stacks));
+                        print(string.format("Voidform Stacks: %.0f", WA_Voidform_Total_Stacks));                        
                         print(string.format("Final Drain: %.0f stacks; %.1f / sec", WA_Voidform_Drain_Stacks, WA_Voidform_Current_Drain_Rate));
                     end
                     
